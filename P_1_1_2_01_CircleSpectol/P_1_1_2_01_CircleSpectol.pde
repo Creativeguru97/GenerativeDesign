@@ -7,7 +7,7 @@ import java.util.Calendar;
 boolean savePDF = false;
 
 int segmentCount = 360;
-int radius = 300;
+int radius = 200;
 
 void setup(){
   size(800, 800);
@@ -22,7 +22,7 @@ void draw(){
   colorMode(HSB, 360, width, height);
   background(360);
   
-  float angleStep = 360/segmentCount;
+  float angleStep = 360/segmentCount;//which is 1.0
   
   beginShape(TRIANGLE_FAN);
   /*more about shape in Processing

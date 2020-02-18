@@ -20,7 +20,7 @@ void draw(){
   if (savePDF) beginRecord(PDF, timestamp()+".pdf");
   
   noStroke();
-  colorMode(HSB, width, height, 100);
+  colorMode(HSB, width, height, 100);//colorMode(Hue, Saturation, Brightness, Alpha)
   
   stepX = mouseX+2;
   stepY = mouseY+2;
@@ -28,6 +28,7 @@ void draw(){
   for(int gridY = 0; gridY<height; gridY += stepY){
     for(int gridX = 0; gridX<width; gridX += stepX){
       fill(gridX, height-gridY, 100);
+        //H:x value, S:y value, B:100
       rect(gridX, gridY, stepX, stepY);
     }
   }
