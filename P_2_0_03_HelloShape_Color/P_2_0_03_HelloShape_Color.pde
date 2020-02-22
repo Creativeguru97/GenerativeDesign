@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 boolean savePDF = false;
 
+color strokeColor = color(0, 20);
 
 void setup(){
   size(800, 800);
@@ -32,8 +33,8 @@ void draw(){
     float radius = mouseX - width / 2 + 0.5;
     float angle = TWO_PI / circleResolution;
     
-    strokeWeight(1);
-    stroke(0, 20);
+    strokeWeight(2);
+    stroke(strokeColor);
     
     noFill();
     beginShape();
@@ -61,6 +62,14 @@ void keyReleased(){
   //if(key == 'c') GenerativeDesign.saveASE(this, colors, timestamp()+".ase");
   if(key == 's') saveFrame(timestamp()+"_##.png");
   if(key == 'p') savePDF = true;
+  
+  if(key == '1'){
+    strokeColor = color(0, 20);
+  }else if(key == '2'){
+    strokeColor = color(192, 100, 64, 10);
+  }else if(key == '3'){
+    strokeColor = color(52, 100, 71, 10);
+  }
   
 }
 
