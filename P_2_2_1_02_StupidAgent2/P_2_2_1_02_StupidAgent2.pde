@@ -19,6 +19,9 @@ int NORTHWEST = 7;
 float stepSize = 1;
 float diameter = 1;
 
+float drawMode = 1;
+int counter = 0;
+
 int direction;
 float posX, posY;
 
@@ -37,7 +40,14 @@ void draw(){
   }
   
   for(int i=0; i<=mouseX; i++){
-    direction = int(random(0, 8));
+    counter++;
+    
+    //Random number for the direction of the next step
+    if(drawMode == 2){
+      direction = int(random(0, 3));// only NORTH, NORTHEAST, EAST possible
+    }else{
+      direction = int(random(0, 7));// all directions without NORTHWEST
+    }
     
     if(direction == NORTH){
       posY -= stepSize;
@@ -65,6 +75,15 @@ void draw(){
     if (posX < 0) posX = width;
     if (posY < 0) posY = height;
     if (posY > height) posY = 0;
+    
+    if(drawMode == 3){
+      //Sometime(1 in 100 frames) bigger and colored dot appears
+      if(counter >= 100){
+        counter = 0;
+        fill(192, 100, 64, 80);
+        ellipse(posX+stepSize/2, posY+stepSize/2, diameter+7, diameter+7);
+      }
+    }
   
   fill(0, 40);
   ellipse(posX+stepSize/2, posY+stepSize/2, diameter, diameter);
@@ -80,6 +99,22 @@ void keyReleased(){
   //if(key == 'c') GenerativeDesign.saveASE(this, colors, timestamp()+".ase");
   if(key == 's') saveFrame(timestamp()+"_##.png");
   if(key == 'p') savePDF = true;
+  
+  if (key == '1') {
+    drawMode = 1;
+    stepSize = 1;
+    diameter = 1;
+  }
+  if (key == '2') {
+    drawMode = 2;
+    stepSize = 1;
+    diameter = 1;
+  }
+  if (key == '3') {
+    drawMode = 3;
+    stepSize = 10;
+    diameter = 5;
+  }
 
 }
 
