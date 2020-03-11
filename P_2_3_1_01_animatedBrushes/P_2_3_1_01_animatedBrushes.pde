@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 boolean savePDF = false;
 int hue = floor(random(0, 360));
-float lineLength = 200;
+float lineLength;
 float angle = 0;
 float angleSpeed = 1.0;
 int dHue = 2;
@@ -27,6 +27,7 @@ void setup(){
 }
 
 void draw(){
+  float mouseSpeed = dist(mouseX, mouseY, pmouseX, pmouseY);
   if(mousePressed){
     pushMatrix();
     strokeWeight(1.0);
@@ -34,14 +35,16 @@ void draw(){
     translate(mouseX, mouseY);
     rotate(radians(angle));
     
+    col = color(hue, 50, 100, 65);
+    stroke(col);
+    lineLength = map(mouseSpeed, 0, 100, 200, 400);
+    
+    line(0, 0, lineLength, 0);
+    popMatrix();
+    
     if(hue >= 360) dHue = dHue * -1;
     else if(hue <= 0) dHue = dHue * -1;
     hue += dHue;
-    
-    col = color(hue, 50, 100, 65);
-    stroke(col);
-    line(0, 0, lineLength, 0);
-    popMatrix();
     
     angle += angleSpeed;
   }
@@ -54,7 +57,7 @@ void keyReleased(){
   if(key == 's') saveFrame(timestamp()+"_##.png");
   if(key == 'p') savePDF = true;
   
-  if (key == DELETE || key == BACKSPACE) background(255);
+  if (key == DELETE || key == BACKSPACE) background(0, 0, 100, 100);
   
 }
 
