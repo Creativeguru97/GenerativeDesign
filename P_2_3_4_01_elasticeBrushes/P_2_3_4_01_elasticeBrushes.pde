@@ -9,13 +9,9 @@ boolean savePDF = false;
 
 float x = 0, y = 0;
 float stepSize = 5.0;
+float moduleSize = 25;
 
-PFont font;
-String letters = "Coding is very fun, why you still haven't started?  ";
-int fontSizeMin = 3;
-float angleDistortion = 0.0;
-
-int counter = 0;
+PShape lineModule;
 
 void setup(){
   size(displayWidth, displayHeight);
@@ -23,31 +19,31 @@ void setup(){
   smooth();
   cursor(CROSS);
   
-  font = createFont("American Typewriter", 10);
-  textFont(font, fontSizeMin);
-  textAlign(LEFT);
-  fill(0);
+  lineModule = loadShape("01.svg");
 }
 
 void draw(){
   if(mousePressed){
     float d = dist(x, y, mouseX, mouseY);//Calsulete distance mouse moved since last frame.
-    textFont(font, fontSizeMin+d/2);//Decide size from the distance.
-    char newLetter = letters.charAt(counter);//A "counter"-th character in the "letters" sentence.
-    stepSize = textWidth(newLetter);
     
     if(d > stepSize){
       float angle = atan2(mouseY-y, mouseX-x);//I love this function, Very intersting!!!
       
       pushMatrix();
-      translate(x, y);//Move coordinate origin
-      rotate(angle + random(angleDistortion));
-      text(newLetter, 0, 0);//Draw a character on the new origin.
+      translate(mouseX, mouseY);//Move coordinate origin
+      rotate(angle+PI);
+      //shape(lineModule, 0, 0, d, moduleSize);
+      shape(lineModule, 0, 0, moduleSize, d);
+      /*
+        shape(shape, a, b, c, d)
+        a: x
+        b: y
+        c: width
+        d: height
+      */
+      
       popMatrix();
-      
-      counter++;
-      if(counter > letters.length()-1) counter = 0;//If reached to end of the sentence, go back to the head.
-      
+ 
       x = x + cos(angle)*stepSize;
       y = y + sin(angle)*stepSize;
     }
@@ -69,13 +65,18 @@ void keyReleased(){
   
   if (key == DELETE || key == BACKSPACE) background(255);//Erase all
   
+  // load svg for line module
+  if (key=='1') lineModule = loadShape("01.svg");
+  if (key=='2') lineModule = loadShape("02.svg");
+  if (key=='3') lineModule = loadShape("03.svg");
+  if (key=='4') lineModule = loadShape("04.svg");
+  if (key=='5') lineModule = loadShape("05.svg");
+  if (key=='6') lineModule = loadShape("06.svg");
+  if (key=='7') lineModule = loadShape("07.svg");
+  if (key=='8') lineModule = loadShape("08.svg");
+  if (key=='9') lineModule = loadShape("09.svg");
+  
 }
-
-void keyPressed(){
-  if(keyCode == UP) angleDistortion += 0.1;
-  if(keyCode == DOWN) angleDistortion -= 0.1;
-}
-
 
 
 String timestamp(){
