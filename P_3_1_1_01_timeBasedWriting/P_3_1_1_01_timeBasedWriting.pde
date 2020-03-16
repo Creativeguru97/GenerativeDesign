@@ -104,9 +104,9 @@ void keyPressed(){
   }
 }
 
-//void keyReleased(){
-//  //if(key == 's') saveFrame(timestamp()+"_##.png");
-//}
+void keyReleased(){
+  //if(key == 's') saveFrame(timestamp()+"_##.png");
+}
 
 
 String timestamp(){
