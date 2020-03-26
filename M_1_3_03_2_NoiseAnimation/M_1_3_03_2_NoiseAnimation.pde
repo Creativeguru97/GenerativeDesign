@@ -18,7 +18,7 @@ int multi = 12;
 int noiseMode = 1;
 
 void setup(){
-size(512,512);
+size(960,540);
 smooth();
 }
 
@@ -42,8 +42,7 @@ void draw(){
   loadPixels();
   for(int x=0; x<width; x++){
     noiseYOffset = noiseYAdd;
-    for(int y=0; y<width; y++){
-      
+    for(int y=0; y<height; y++){
       
       float noiseValue = 0;
       if(noiseMode == 1) noiseValue = noise(noiseXOffset, noiseYOffset) * 255;
