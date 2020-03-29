@@ -1,21 +1,19 @@
 
 class Agent{
-  PVector p, pOld;
-  float stepSize, offset, angleY, angleZ;
   boolean isOutSide = false;
-  float noiseZ, noiseZVelocity = 0.01;
+  PVector p;
+  float stepSize, offset, angleY, angleZ;
   Ribbon3d ribbon;
   
   Agent(){
     p = new PVector(0, 0, 0);
     setRandomPosition();
-    pOld = new PVector(p.x, p.y);
-    stepSize = random(1, 3);
     offset = 10000;
-    ribbon = new Ribbon3d(p, (int)random(50, 300));
+    stepSize = random(0.3, 1.5);
+    ribbon = new Ribbon3d(p, int(random(20, 40)));
   }
   
-  void update(){
+  void update(){//All this does is calculates positions of the agents
     angleY = noise(p.x / noiseScale, p.y / noiseScale, p.z / noiseScale) * noiseStrength;
     angleZ = noise(p.x / noiseScale+offset, p.y / noiseScale, p.z / noiseScale) * noiseStrength;
     
@@ -23,41 +21,36 @@ class Agent{
     p.y += sin(angleZ) * sin(angleZ) * stepSize;
     p.z += cos(angleZ) * stepSize;
     
-    if(agentPosMode == 1){
-      if(p.x < -spaceSizeX || p.x > spaceSizeX || 
-         p.y < -spaceSizeY || p.y > spaceSizeY ||
-         p.z < -spaceSizeZ || p.z > spaceSizeZ){
-         
-         setRandomPosition();
-         isOutSide = true;
-      }
-    
-      if(isOutSide){
-        p.x = random(width);
-        p.y = random(height);
-        pOld.set(p);//Copying from p
-      }
-    }else if(agentPosMode == 2){
-      if(p.x < -spaceSizeX-10) p.x = pOld.x = spaceSizeX+10;
-      if(p.x > spaceSizeX+10) p.x = pOld.x = -spaceSizeX-10;
-      if(p.y < -spaceSizeY-10) p.y = pOld.y = spaceSizeY+10;
-      if(p.y > spaceSizeY+10) p.y = pOld.y = -spaceSizeY-10;
-      if(p.z < -spaceSizeZ-10) p.z = pOld.z = spaceSizeZ+10;
-      if(p.z > spaceSizeZ+10) p.z = pOld.z = -spaceSizeZ-10;
+
+    if(p.x < -spaceSizeX || p.x > spaceSizeX || 
+       p.y < -spaceSizeY || p.y > spaceSizeY ||
+       p.z < -spaceSizeZ || p.z > spaceSizeZ){
+       
+        if(drawMode == 1) resetPosition();
+        if(drawMode == 2) setRandomPosition();
+       
+       isOutSide = true;
     }
-    
+ 
+
     // create ribbons
-    ribbon.update(p,isOutside);
-    
-    if(agentPosMode == 1){
-      isOutSide = false;
-    }
+    ribbon.update(p,isOutSide);
+    isOutSide = false;
     
   }
   
   void show(){
-    ribbon.drawLineRibbon(agentColor, 2.0);
+    ribbon.drawLineRibbon(1.0);
     
+  }
+  
+  void resetPosition(){
+    if(p.x < -spaceSizeX) p.x = spaceSizeX;
+    if(p.x > spaceSizeX) p.x = -spaceSizeX;
+    if(p.y < -spaceSizeY) p.y = spaceSizeY;
+    if(p.y > spaceSizeY) p.y = -spaceSizeY;
+    if(p.z < -spaceSizeZ) p.z = spaceSizeZ;
+    if(p.z > spaceSizeZ) p.z = -spaceSizeZ;
   }
   
   void setRandomPosition(){
