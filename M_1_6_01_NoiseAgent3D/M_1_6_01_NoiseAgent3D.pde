@@ -12,6 +12,7 @@ Agent[] agents = new Agent[4000];
 int agentsCount = 4000;
 float noiseScale=100, noiseStrength=10;
 float agentAlpha = 0;
+int agentHue;
 color agentColor;
 int drawMode = 1;
 int agentPosMode = 1;
@@ -30,7 +31,8 @@ void setup(){
   //translate(width/2, height/2);//Peasy Cam automatically does this
 
   for(int i=0; i<agents.length; i++){
-    agents[i] = new Agent();
+    agentHue = int(random(110, 290));
+    agents[i] = new Agent(agentHue);
   }
 }
 
@@ -50,11 +52,15 @@ void draw(){
   strokeWeight(1); 
   box(spaceSizeX*2, spaceSizeY*2, spaceSizeZ*2);
   
+  //Make it interactive!
   //noiseScale = map(mouseX, 0, width, 50, 400);
   //noiseStrength = map(mouseY, 0, height, 3, 30);
   
   //Draw and update agents
   for (int i=0; i<agentsCount; i++){
+    if(keyPressed){
+      agents[i].move();
+    }
     if(freeze == false) agents[i].update();
     agents[i].show();
   } 
@@ -64,7 +70,7 @@ void draw(){
   hint(DISABLE_DEPTH_TEST);
   noLights();
   
-  println(drawMode);
+  //println(drawMode);
 }
 
 

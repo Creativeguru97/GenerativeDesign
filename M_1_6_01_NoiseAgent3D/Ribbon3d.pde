@@ -3,12 +3,14 @@ class Ribbon3d{
   int count; //How many points has the ribbon.
   PVector[] p;
   boolean[] isGap;
+  int hue;
   
-  Ribbon3d(PVector theP, int theCount){
+  Ribbon3d(PVector theP, int theCount, int hue_){
     count = theCount;
     p = new PVector[count];
     isGap = new boolean[count];
-    
+    hue = hue_;
+
     for(int i=0; i<count; i++){
       p[i] = new PVector(theP.x, theP.y, theP.z);
       isGap[i] = false;
@@ -34,8 +36,8 @@ class Ribbon3d{
     for(int i=0; i<count-1; i++){
       //If the point was wrapped => finish the line and start a new one
       if(isGap[i] == false){
-        agentAlpha = 100-(100/count*i);
-        agentColor = color(0, 0, 100, agentAlpha);
+        agentAlpha = 100-(100/count*i);//This is key to make latter of agents look gradually fade aways
+        agentColor = color(hue, 50, 100, agentAlpha);
         stroke(agentColor);
         
         beginShape(LINES);

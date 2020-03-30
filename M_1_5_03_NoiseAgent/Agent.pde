@@ -1,4 +1,3 @@
-
 class Agent{
   PVector p, pOld;
   float stepSize, angle;
