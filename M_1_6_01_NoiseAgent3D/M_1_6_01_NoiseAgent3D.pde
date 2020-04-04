@@ -22,7 +22,7 @@ int spaceSizeX = 200, spaceSizeY = 300, spaceSizeZ = 200;
 boolean freeze = false;
 
 void setup(){
-  size(800, 800, P3D);
+  size(displayWidth, displayHeight, P3D);
   colorMode(HSB, 360, 100, 100);
   
   cam = new PeasyCam(this, 800);
