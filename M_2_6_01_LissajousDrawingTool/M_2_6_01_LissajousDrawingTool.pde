@@ -116,9 +116,20 @@ void draw(){
     }
     
     //Simple drawing method
+    colorMode(HSB, 360, 100, 100, 100);
     
+    for (int i=1; i<pointCount; i++){
+      PVector p1 = (PVector) pointList.get(i-1);
+      PVector p2 = (PVector) pointList.get(i);
+      drawLine(p1, p2);
+      i1++;
+    }    
+  }else{
+    //Drawing method where all points are connected with each other
+    //Alpha depends on distance of the points
     
-    //It's too complicated. Tomorrow!!!!!!!!!!
+    //Clear background if drawing of the lines will start from the beginning
+    
   }
 }
 
