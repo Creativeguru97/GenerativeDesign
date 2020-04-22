@@ -9,7 +9,7 @@ import java.util.Calendar;
 Agent[] agents = new Agent[5000];
 int agentsCount = 5000;
 float noiseScale = 600, noiseStrength = 10;
-float overlayAlpha = 10, agentsAlpha = 90, strokeWidth = 0.3;
+float overlayAlpha = 10, agentsAlpha = 90, strokeWidth = 1;
 int drawMode = 1;
 int agentPosMode = 1;
 

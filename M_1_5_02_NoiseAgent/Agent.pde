@@ -7,7 +7,7 @@ class Agent{
   Agent(){
     p = new PVector(random(width), random(height));
     pOld = new PVector(p.x, p.y);
-    stepSize = random(1, 2);
+    stepSize = random(1, 1);
   }
   
   void update1(){
