@@ -17,6 +17,8 @@ class Agent{
     p.x += cos(angle) * stepSize;
     p.y += sin(angle) * stepSize;
     
+    //println(sin(angle));
+    
     if(agentPosMode == 1){
       if(p.x < -10) isOutSide = true;
       else if(p.x > width+10) isOutSide = true;

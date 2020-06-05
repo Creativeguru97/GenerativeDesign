@@ -34,7 +34,6 @@ void draw(){
       float noiseX = map(x, 0, width, 0, noiseXRange);
       float noiseY = map(y, 0, height, 0, noiseYRange);
       
-      
       float noiseValue = 0;
       if(noiseMode == 1) noiseValue = noise(noiseX, noiseY) * 255;
       else if(noiseMode == 2) {

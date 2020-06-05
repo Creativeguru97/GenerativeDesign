@@ -21,13 +21,13 @@ class Agent{
   }
   
   void update(){//All this does is calculates positions of the agents
-  
-    
     angleY = noise(p.x / noiseScale+offsetX, p.y / noiseScale+offsetY, p.z / noiseScale+offsetZ) * noiseStrength;
     angleZ = noise(p.x / noiseScale+offset+offsetX, p.y / noiseScale+offsetY, p.z / noiseScale+offsetZ) * noiseStrength;
     
+    //This represent "addtion" for agent position at each frame.
+    //Not the position itself.
     p.x += sin(angleZ) * cos(angleY) * stepSize;
-    p.y += sin(angleZ) * sin(angleZ) * stepSize;
+    p.y += sin(angleZ) * sin(angleY) * stepSize;
     p.z += cos(angleZ) * stepSize;
     
 

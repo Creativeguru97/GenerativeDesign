@@ -15,6 +15,7 @@ class Ribbon3d{
       p[i] = new PVector(theP.x, theP.y, theP.z);
       isGap[i] = false;
     }
+    //println(p);
   }
   
   void update(PVector theP, boolean theIsGap){
@@ -44,6 +45,7 @@ class Ribbon3d{
         vertex(p[i].x, p[i].y, p[i].z);
         vertex(p[i+1].x, p[i+1].y, p[i+1].z);
         endShape();
+        //point(p[i].x, p[i].y, p[i].z);
       }
     }
   }

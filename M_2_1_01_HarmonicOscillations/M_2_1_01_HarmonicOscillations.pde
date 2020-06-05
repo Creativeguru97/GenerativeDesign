@@ -4,7 +4,7 @@ import java.util.Calendar;
     //www.tutorialspoint.com/conversion-characters-for-time-in-java*/
     
 int pointCount;
-int freq = 1;
+int freq = 6;
 float phi = 0;
 
 float angle;
